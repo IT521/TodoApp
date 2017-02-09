@@ -78,7 +78,18 @@ function Footer(props) {
     }
 
     const remaining = props.todos.filter(todo => !todo.complete).size;
+    const completed = props.todos.size - remaining;
     const phrase = remaining === 1 ? ' item left' : ' items left';
+
+    let clearCompletedButton = null;
+    if (completed > 0) {
+        clearCompletedButton =
+            (<button
+                id="clear-completed"
+                onClick={props.onDeleteCompletedTodos}>
+                Clear completed ({completed})
+            </button>);
+    }
 
     return (
         <footer id="footer">
@@ -88,6 +99,7 @@ function Footer(props) {
             </strong>
               {phrase}
           </span>
+            {clearCompletedButton}
         </footer>
     );
 }

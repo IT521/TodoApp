@@ -24,8 +24,17 @@ function Main(props) {
     if (props.todos.size === 0) {
         return null;
     }
+    const dataTip = props.areAllComplete ? 'Mark all as incomplete' : 'Mark all as complete';
     return (
         <section id="main">
+            <div data-tip={dataTip}>
+                <input
+                    checked={props.areAllComplete ? 'checked' : ''}
+                    id="toggle-all"
+                    type="checkbox"
+                    onChange={props.onToggleAllTodos}
+                />
+            </div>
             <ul id="todo-list">
                 {[...props.todos.values()].reverse().map(todo => (
                     <li key={todo.id}>

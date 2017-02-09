@@ -15,6 +15,7 @@ function Header(props) {
         <header id="header">
             <h1>Todos</h1>
             <h3>An Introduction to the React Flux Architecture</h3>
+            <NewTodo {...props} />
         </header>
     );
 }
@@ -45,6 +46,29 @@ function Main(props) {
                 ))}
             </ul>
         </section>
+    );
+}
+
+const ENTER_KEY_CODE = 13;
+function NewTodo(props) {
+    const addTodo = () => props.onAdd(props.draft);
+    const onBlur = () => addTodo();
+    const onChange = (event) => props.onUpdateDraft(event.target.value);
+    const onKeyDown = (event) => {
+        if (event.keyCode === ENTER_KEY_CODE) {
+            addTodo();
+        }
+    };
+    return (
+        <input
+            autoFocus={true}
+            id="new-todo"
+            placeholder="What needs to be done?"
+            value={props.draft}
+            onBlur={onBlur}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+        />
     );
 }
 

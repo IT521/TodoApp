@@ -5,6 +5,7 @@ import AppView from '../views/AppView';
 
 // Stores
 import TodoStore from '../data/TodoStore';
+import TodoDraftStore from '../data/TodoDraftStore';
 
 // Actions
 import TodoActions from '../data/TodoActions';
@@ -20,14 +21,19 @@ TodoActions.addTodo('Complete demo');
 function getStores() {
     return [
         TodoStore,
+        TodoDraftStore,
     ];
 }
 
 function getState() {
     return {
+        draft: TodoDraftStore.getState(),
         todos: TodoStore.getState(),
+
+        onAdd: TodoActions.addTodo,
         onDeleteTodo: TodoActions.deleteTodo,
         onToggleTodo: TodoActions.toggleTodo,
+        onUpdateDraft: TodoActions.updateDraft,
     };
 }
 
